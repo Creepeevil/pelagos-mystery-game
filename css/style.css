@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Libre+Caslon+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Serif:wght@400;500;600;700&display=swap");
 #card-size {
   display: none;
 }
@@ -56,7 +56,7 @@ p {
   margin: 0;
 }
 h2 {
-  font-family: Georgia, serif;
+  font-family: "Noto Serif", serif;
   font-weight: 400;
 }
 button,
@@ -88,14 +88,14 @@ button,
   font-weight: 500;
 }
 .masthead h1 {
-  font-family: "Libre Caslon Display", Georgia, serif;
+  font-family: "Noto Serif", Georgia, serif;
   font-size: 98px;
   line-height: 1.06;
   letter-spacing: 9px;
   margin: 5px 0 10px;
 }
 .subtitle {
-  font-family: Georgia, serif;
+  font-family: "Noto Serif", serif;
   font-size: 14px;
   letter-spacing: 2px;
 }
@@ -128,7 +128,7 @@ main {
   align-items: center;
 }
 .section-number {
-  font-family: Georgia, serif;
+  font-family: "Noto Serif", serif;
   font-size: 18px;
   color: var(--wine);
   border: 1px solid var(--line);
@@ -158,14 +158,14 @@ main {
   border-bottom: 2px solid transparent;
   padding: 10px 7px 12px;
   min-width: 115px;
-  font-family: Georgia, serif;
+  font-family: "Noto Serif", serif;
   letter-spacing: 1.8px;
   font-size: 15px;
   color: var(--wine);
 }
 .categories button span {
   display: block;
-  font-family: "Be Vietnam Pro", sans-serif;
+  font-family: "Noto Serif", serif;
   font-size: 9px;
   letter-spacing: 0.2px;
   color: var(--muted);
@@ -190,7 +190,7 @@ main {
 }
 .empty-dossier p {
   font:
-    italic 21px Georgia,
+    italic 21px "Noto Serif",
     serif;
   color: var(--ink);
   margin: 13px 0 9px;
@@ -255,7 +255,7 @@ main {
 }
 .card-caption {
   margin: 9px 0 0;
-  font-family: Georgia, serif;
+  font-family: "Noto Serif", serif;
   font-size: 13px;
   letter-spacing: 0.5px;
   color: var(--wine);
@@ -341,7 +341,7 @@ main {
   padding: 2px 4px 2px 0;
 }
 .axis-title {
-  font-family: Georgia, serif;
+  font-family: "Noto Serif", serif;
   letter-spacing: 1.5px;
   font-size: 10px;
   color: var(--wine);
@@ -371,7 +371,7 @@ main {
 }
 .entity-label {
   min-width: 0;
-  font-family: Georgia, serif;
+  font-family: "Noto Serif", serif;
   font-size: 10px;
 }
 .entity-label img {
@@ -437,7 +437,7 @@ main {
   border-right: 1px solid #625e53;
   border-bottom: 1px solid #625e53;
   background: transparent;
-  font-family: Georgia, serif;
+  font-family: "Noto Serif", serif;
   font-size: 25px;
   line-height: 1;
   transition: background 0.12s ease;
@@ -475,7 +475,7 @@ main {
   border: 1px solid #b9ae99;
   padding: 11px 17px;
   color: var(--wine);
-  font-family: Georgia, serif;
+  font-family: "Noto Serif", serif;
   letter-spacing: 1px;
   font-size: 10px;
   white-space: nowrap;
@@ -500,7 +500,7 @@ footer {
 }
 footer > span:first-child {
   font:
-    18px "Libre Caslon Display",
+    18px "Noto Serif",
     Georgia,
     serif;
   letter-spacing: 3px;

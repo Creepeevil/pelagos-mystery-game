@@ -78,6 +78,11 @@ try {
     await page.reload();
     assert.equal(await cell.getAttribute("data-state"), "3");
     assert.equal(await page.locator('.cell[data-state="1"]').count(), 6);
+    await cell.click();
+    assert.equal(await page.locator('.cell[data-state="0"]').count(), 48);
+    await page.reload();
+    assert.equal(await page.locator('.cell[data-state="0"]').count(), 48);
+    for (let i = 0; i < 3; i++) await cell.click();
     await page.locator('[data-category="suspects"]').click();
     await page.waitForFunction(() =>
       [...document.querySelectorAll("img")].every(

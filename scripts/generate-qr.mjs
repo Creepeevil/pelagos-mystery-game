@@ -2,22 +2,24 @@ import QRCode from "qrcode";
 import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
-const production = "https://ailakecapmattrang.com/";
-const url = process.argv[2];
-if (url !== production) throw new Error(`QR must point to ${production}`);
+const pagesUrl = "https://creepeevil.github.io/pelagos-mystery-game/";
+const customDomainUrl = "https://ailakecapmattrang.com/";
+const url = process.argv[2] ?? pagesUrl;
+if (![pagesUrl, customDomainUrl].includes(url))
+  throw new Error(`QR must point to ${pagesUrl} or ${customDomainUrl}`);
 // Do not produce print assets until the deployed game is actually accessible.
 const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
 if (!response.ok || new URL(response.url).protocol !== "https:")
-  throw new Error("Production HTTPS is not ready.");
+  throw new Error("The public game URL is not ready over HTTPS.");
 const html = await response.text();
 if (!html.includes("INVESTIGATOR'S NOTEBOOK") || !html.includes("js/app.js"))
-  throw new Error("The production URL does not serve the Pelagos game.");
+  throw new Error("The public URL does not serve the Pelagos game.");
 const root = new URL("../", import.meta.url);
 for (const asset of ["js/app.js", "assets/cards/suspects/bernica-front.webp"]) {
   const check = await fetch(new URL(asset, url), {
     signal: AbortSignal.timeout(20000),
   });
-  if (!check.ok) throw new Error(`Production asset unavailable: ${asset}`);
+  if (!check.ok) throw new Error(`Public game asset unavailable: ${asset}`);
 }
 const directory = new URL("qr/", root);
 await mkdir(directory, { recursive: true });
@@ -37,3 +39,4 @@ await writeFile(
   await QRCode.toString(url, { ...options, type: "svg" }),
 );
 console.log("Created qr/pelagos-game-qr.png and qr/pelagos-game-qr.svg");
+console.log(`QR destination: ${url}`);

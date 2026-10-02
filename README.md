@@ -100,13 +100,13 @@ Repeated taps cycle EMPTY → ✕ EXCLUDED → ? POSSIBLE → ✓ CONFIRMED → 
 
 ## Auto Elimination
 
-Only a newly placed ✓ excludes the six other cells in its row and column, in the same matrix. A new confirmation overrides old ✓ and ? neighbors. No deductions cross between matrices. Clearing a ✓ leaves prior exclusions in place so the player can revise them.
+Only a newly placed ✓ excludes the six other cells in its row and column, in the same matrix. A new confirmation overrides old ✓ and ? neighbors. No deductions cross between matrices. Clearing a ✓ removes its automatic ✕ marks, except where another ✓ still requires the exclusion. Manually placed ✕ marks are preserved. Replacing a confirmation also clears automatic exclusions that are no longer needed.
 
 Test: tap Moon Key × Bernica three times. It becomes ✓, the three other suspects in the Moon Key row and the three other weapons in Bernica's column become ✕. The other two matrices remain untouched. Also try Power Drill × Control Room and Underground Tunnel × Glaucous in their respective matrices.
 
 ## LocalStorage
 
-Key: `pelagos-deduction-grid-v1`. Example stable cell ID: `weapons-suspects:moon-key:bernica`. Reload the page after marking cells; marks and automatic exclusions remain. Progress is specific to the device, browser and origin; the GitHub Pages URL and custom domain have separate storage. Invalid JSON or invalid cell states are ignored. If storage is blocked or full, play continues in memory and the status tells the player saving failed.
+Key: `pelagos-deduction-grid-v1`. Example stable cell ID: `weapons-suspects:moon-key:bernica`. Reload the page after marking cells; marks and automatic exclusions remain. `_automaticExclusions` records automatically placed crosses so they can be removed after a refresh. Older saves lack that metadata, so crosses beside saved confirmations are treated as automatic when loaded. Progress is specific to the device, browser and origin; the GitHub Pages URL and custom domain have separate storage. Invalid JSON or invalid cell states are ignored. If storage is blocked or full, play continues in memory and the status tells the player saving failed.
 
 ## Reset Notebook
 
@@ -118,13 +118,15 @@ Wide desktop displays show the card dossier beside the notebook. Smaller desktop
 
 ## Generate QR
 
-Do this only after deployment, DNS, HTTPS and production testing:
+Current public game: https://creepeevil.github.io/pelagos-mystery-game/
 
 ```sh
-npm run qr -- https://ailakecapmattrang.com/
+npm.cmd run qr -- https://creepeevil.github.io/pelagos-mystery-game/
 ```
 
-The script refuses a different URL and verifies the live game and representative assets before writing files. Outputs: `qr/pelagos-game-qr.png` (1200 × 1200) and `qr/pelagos-game-qr.svg`. Both encode only the homepage, with error correction H, a four-module margin, black foreground and white background. Scan the PNG with a real phone before printing. They are not generated while production DNS is unavailable.
+The script accepts the current GitHub Pages homepage or the planned custom domain and verifies the live game and representative assets before writing files. Outputs: `qr/pelagos-game-qr.png` (1200 × 1200) and `qr/pelagos-game-qr.svg`. Both encode only the selected homepage, with error correction H, a four-module margin, black foreground and white background. Scan the PNG with a real phone before printing. On Windows, `npm.cmd` avoids PowerShell execution-policy errors; `npm` works in other shells.
+
+After custom-domain DNS and HTTPS are ready, run `npm.cmd run qr -- https://ailakecapmattrang.com/` to overwrite these files with QR codes for that domain. Already printed codes keep their original destination.
 
 ## GitHub Repository
 
@@ -210,4 +212,4 @@ node tests/browser-check.mjs
 
 The browser check expects the local server on port 3000. Screenshots and browser reports go under ignored `tmp/`.
 
-Current deployment status: original assets exported and local game implemented. Target repository could not be reached (`Repository not found`); available GitHub account is not `ngocannie`. Production hostname currently returns no DNS record. GitHub Pages, domain/HTTPS configuration and final QR must be completed after the target repository and DNS access are available.
+Current deployment status: the game is public at https://creepeevil.github.io/pelagos-mystery-game/. QR PNG and SVG files encode this address. References to `ngocannie` above describe the original deployment plan; the current GitHub Pages owner is `creepeevil`. The planned custom domain has not been verified as part of this QR update.

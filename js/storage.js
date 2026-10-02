@@ -9,7 +9,13 @@ export function loadNotebook() {
 }
 export function saveNotebook(state) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        ...state,
+        _automaticExclusions: [...(state.automaticExclusions ?? [])],
+      }),
+    );
     return true;
   } catch {
     return false;

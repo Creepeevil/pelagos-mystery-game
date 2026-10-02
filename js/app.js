@@ -24,9 +24,6 @@ document.querySelector("#card-size").addEventListener("click", (event) => {
     .querySelector("#cards")
     .classList.toggle("large-cards");
   event.currentTarget.setAttribute("aria-pressed", String(expanded));
-  event.currentTarget.textContent = expanded
-    ? "Xem hai thẻ mỗi hàng"
-    : "Xem thẻ lớn";
 });
 document.querySelector("#reset").addEventListener("click", () => {
   dialog.returnValue = "";
