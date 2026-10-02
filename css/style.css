@@ -562,6 +562,79 @@ dialog p {
     opacity: 1;
   }
 }
+.final-answer {
+  min-width: 0;
+  border-top: 1px solid var(--ink);
+  padding: 25px 0 40px;
+  grid-column: 1 / -1;
+}
+.final-description {
+  margin: 18px 0 24px;
+  color: var(--muted);
+}
+.final-controls, .final-result {
+  max-width: 620px;
+  margin: 0 auto;
+}
+.final-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-right: 6px;
+}
+.final-controls select {
+  width: 100%;
+  min-width: 0;
+  height: 62px;
+  appearance: none;
+  background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath d='M1 2l6 6 6-6' fill='none' stroke='%23713635' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 18px center;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 5px 6px 0 var(--line);
+  padding: 0 40px;
+  color: var(--wine);
+  font: 600 18px "Noto Serif", Georgia, serif;
+  text-align: center;
+  text-align-last: center;
+  cursor: pointer;
+}
+.final-controls select:focus-visible, .final-result:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 4px;
+}
+.final-submit {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 6px;
+  border: 2px solid var(--wine);
+  border-radius: 6px;
+  background: var(--wine);
+  color: var(--paper);
+  font: 600 16px "Noto Serif", Georgia, serif;
+  letter-spacing: 1px;
+}
+.final-submit:disabled { opacity: 0.45; cursor: not-allowed; }
+.final-result {
+  border: 2px solid var(--wine);
+  border-radius: 6px;
+  box-shadow: 5px 6px 0 var(--line);
+  padding: 28px;
+  overflow-wrap: anywhere;
+}
+.final-result h3 { margin: 0; text-align: center; color: var(--wine); font: 600 20px "Noto Serif", Georgia, serif; }
+.final-result dl { margin: 24px 0; }
+.final-result dt { margin-top: 18px; color: var(--muted); font-size: 11px; letter-spacing: 1px; }
+.final-result dd { margin: 4px 0 0; font: 600 20px "Noto Serif", Georgia, serif; }
+.final-result p { border-top: 1px solid var(--line); padding-top: 18px; }
+.final-storage-status { margin-top: 16px; color: var(--wine); }
+#final-dialog { font-family: "Noto Serif", Georgia, serif; }
+#final-dialog h2 { font-size: 24px; }
+#final-dialog .dialog-actions { flex-wrap: wrap; }
+#final-dialog button { min-height: 48px; }
+@media (max-width: 700px) {
+  .final-controls select { height: 56px; font-size: 16px; }
+  .final-result { padding: 22px 18px; margin-right: 6px; }
+}
 @media (min-width: 1400px) {
   main {
     max-width: 1320px;
@@ -616,7 +689,7 @@ dialog p {
     padding: 30px 20px 25px;
   }
   .masthead h1 {
-    font-size: 70px;
+    font-size: clamp(48px, 16vw, 70px);
     letter-spacing: 5px;
   }
   .subtitle {
@@ -718,7 +791,7 @@ dialog p {
     grid-template-columns: 1fr;
   }
   .masthead h1 {
-    font-size: 56px;
+    font-size: 48px;
   }
   .legend {
     gap: 5px;

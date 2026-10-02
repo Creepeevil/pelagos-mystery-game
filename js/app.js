@@ -1,6 +1,9 @@
 import { gameData } from "./data.js";
 import { renderCards } from "./cards.js";
 import { initNotebook } from "./notebook.js";
+import { initFinalAnswer } from "./final-answer.js";
+
+const finalAnswer = initFinalAnswer(document.querySelector("#final-answer"), gameData);
 
 const notebook = initNotebook(
   document.querySelector("#logic-notebook"),
@@ -19,7 +22,7 @@ for (const button of document.querySelectorAll("[data-category]")) {
   });
 }
 const dialog = document.querySelector("#reset-dialog");
-document.querySelector("#card-size").addEventListener("click", (event) => {
+document.querySelector("#card-size")?.addEventListener("click", (event) => {
   const expanded = document
     .querySelector("#cards")
     .classList.toggle("large-cards");
@@ -30,5 +33,8 @@ document.querySelector("#reset").addEventListener("click", () => {
   dialog.showModal();
 });
 dialog.addEventListener("close", () => {
-  if (dialog.returnValue === "confirm") notebook.reset();
+  if (dialog.returnValue === "confirm") {
+    notebook.reset();
+    finalAnswer.reset();
+  }
 });

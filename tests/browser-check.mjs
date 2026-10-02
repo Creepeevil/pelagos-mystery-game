@@ -45,7 +45,7 @@ try {
           path: `tmp/back-${viewport.width}.png`,
           fullPage: true,
         });
-      if (viewport.width === 390 && category === "suspects") {
+      if (viewport.width === 390 && category === "suspects" && await page.locator("#card-size").count()) {
         await page.locator("#card-size").click();
         assert.equal(
           await page.locator("#card-size").getAttribute("aria-pressed"),
@@ -108,9 +108,43 @@ try {
       path: `tmp/desktop-${viewport.width}.png`,
       fullPage: true,
     });
+    assert.equal(await page.locator("#final-submit").isDisabled(), true);
+    for (const [field, category] of [["suspect", "suspects"], ["weapon", "weapons"], ["location", "locations"]]) {
+      const actual = await page.locator(`#final-${field} option`).evaluateAll(options => options.slice(1).map(option => ({ id: option.value, name: option.textContent })));
+      const expected = await page.evaluate(async category => {
+        const { gameData } = await import("/js/data.js");
+        return gameData[category].map(({ id, name }) => ({ id, name }));
+      }, category);
+      assert.deepEqual(actual, expected);
+    }
+    await page.locator("#final-suspect").selectOption("alyssa");
+    await page.locator("#final-weapon").selectOption("metal-clamp");
+    await page.reload();
+    assert.equal(await page.locator("#final-suspect").inputValue(), "alyssa");
+    assert.equal(await page.locator("#final-weapon").inputValue(), "metal-clamp");
+    assert.equal(await page.locator("#final-submit").isDisabled(), true);
+    await page.locator("#final-location").selectOption("old-library");
+    await page.locator("#final-submit").click();
+    await page.locator("#final-cancel").click();
+    assert.equal(await page.locator("#final-suspect").isEnabled(), true);
+    await page.locator("#final-submit").click();
+    await page.keyboard.press("Escape");
+    assert.equal(await page.locator("#final-suspect").isEnabled(), true);
+    await page.locator("#final-submit").click();
+    await page.locator("#final-confirm").click();
+    await page.reload();
+    assert.equal(await page.locator(".final-result").isVisible(), true);
+    assert.equal(await page.locator("#final-suspect").isDisabled(), true);
+    assert.equal(await page.locator('[data-answer="suspect"]').textContent(), "Alyssa");
+    assert.equal(await page.locator('[data-answer="weapon"]').textContent(), "Metal Clamp");
+    assert.equal(await page.locator('[data-answer="location"]').textContent(), "Old Library");
+    assert.equal(await cell.getAttribute("data-state"), "3");
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.screenshot({ path: `tmp/final-locked-${viewport.width}.png`, fullPage: true });
     await page.locator("#reset").click();
     await page.getByRole("button", { name: "Giữ ghi chú" }).click();
     assert.equal(await cell.getAttribute("data-state"), "3");
+    assert.equal(await page.locator(".final-result").isVisible(), true);
     await page.locator("#reset").click();
     await page.getByRole("button", { name: "Xóa toàn bộ" }).click();
     await page.waitForFunction(
@@ -125,6 +159,11 @@ try {
     );
     await page.reload();
     assert.equal(await page.locator('.cell[data-state="0"]').count(), 48);
+    assert.equal(await page.locator("#final-suspect").inputValue(), "");
+    assert.equal(await page.locator("#final-weapon").inputValue(), "");
+    assert.equal(await page.locator("#final-location").inputValue(), "");
+    assert.equal(await page.locator("#final-submit").isDisabled(), true);
+    assert.equal(await page.evaluate(() => localStorage.getItem("pelagos-final-answer-v1")), null);
     assert.deepEqual(errors, []);
     results.push({ viewport, ...sizes, errors, passed: true });
     await context.close();

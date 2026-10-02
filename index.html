@@ -44,12 +44,9 @@
         </nav>
         <div id="card-empty" class="empty-dossier">
           <p>Bắt đầu phá án (hồi 3)</p>
-          <span>Chọn một nhóm ở trên để mở hồ sơ.</span>
+          <span>Chọn một nhóm ở trên để mở hồ sơ</span>
         </div>
         <div id="card-area" hidden>
-          <button id="card-size" type="button" aria-pressed="false">
-            Xem thẻ lớn
-          </button>
           <p class="card-instruction">CHẠM VÀO THẺ ĐỂ LẬT MẶT TRƯỚC / SAU</p>
           <div id="cards" class="cards"></div>
         </div>
@@ -86,7 +83,7 @@
               >Vuốt ngang để xem toàn bộ bảng.</span
             >
           </p>
-          <button id="reset" type="button" class="reset">RESET NOTEBOOK</button>
+          <button id="reset" type="button" class="reset">RESET CASE</button>
         </div>
         <p
           id="grid-status"
@@ -94,6 +91,32 @@
           role="status"
           aria-live="polite"
         ></p>
+      </section>
+      <section id="final-answer" class="final-answer" aria-labelledby="final-title">
+        <div class="section-heading">
+          <span class="section-number">03</span>
+          <div><p class="eyebrow">SUY LUẬN CUỐI CÙNG</p><h2 id="final-title">CHỐT ĐÁP ÁN</h2></div>
+        </div>
+        <p class="final-description">Chọn nghi phạm, công cụ và địa điểm mà bạn cho là đáp án cuối cùng.</p>
+        <div class="final-controls">
+          <label class="sr-only" for="final-suspect">Ai? Chọn nghi phạm</label>
+          <select id="final-suspect"><option value="">WHO?</option></select>
+          <label class="sr-only" for="final-weapon">Bằng gì? Chọn công cụ</label>
+          <select id="final-weapon"><option value="">HOW?</option></select>
+          <label class="sr-only" for="final-location">Ở đâu? Chọn địa điểm</label>
+          <select id="final-location"><option value="">WHERE?</option></select>
+          <button id="final-submit" class="final-submit" type="button" disabled>CHỐT ĐÁP ÁN</button>
+        </div>
+        <article class="final-result" hidden tabindex="-1" aria-labelledby="final-result-title">
+          <h3 id="final-result-title">ĐÁP ÁN ĐÃ CHỐT</h3>
+          <dl>
+            <dt>AI?</dt><dd data-answer="suspect"></dd>
+            <dt>BẰNG GÌ?</dt><dd data-answer="weapon"></dd>
+            <dt>Ở ĐÂU?</dt><dd data-answer="location"></dd>
+          </dl>
+          <p>Đưa màn hình này cho Trưởng trạm để kiểm tra.</p>
+        </article>
+        <p class="final-storage-status" role="status" aria-live="polite"></p>
       </section>
     </main>
     <footer>
@@ -105,12 +128,20 @@
       <form method="dialog">
         <p class="eyebrow">SỔ TAY SUY LUẬN</p>
         <h2 id="reset-title">Bắt đầu lại?</h2>
-        <p>Bạn có chắc muốn xóa toàn bộ ghi chú suy luận?</p>
+        <p>Bạn có chắc muốn xóa toàn bộ ghi chú suy luận và đáp án đã chọn hoặc đã chốt?</p>
         <div class="dialog-actions">
           <button value="cancel" autofocus>Giữ ghi chú</button
           ><button value="confirm" class="danger">Xóa toàn bộ</button>
         </div>
       </form>
+    </dialog>
+    <dialog id="final-dialog" aria-labelledby="final-dialog-title" aria-describedby="final-dialog-description">
+      <h2 id="final-dialog-title">Bạn có chắc muốn chốt đáp án?</h2>
+      <p id="final-dialog-description">Sau khi chốt, lựa chọn của bạn sẽ được khóa để Trưởng trạm kiểm tra.</p>
+      <div class="dialog-actions">
+        <button id="final-cancel" type="button" autofocus>QUAY LẠI</button>
+        <button id="final-confirm" type="button" class="danger">CHỐT ĐÁP ÁN</button>
+      </div>
     </dialog>
   </body>
 </html>
