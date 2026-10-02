@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f3e9" />
+    <meta
+      name="description"
+      content="Hồ sơ Pelagos và sổ tay suy luận dành cho người điều tra."
+    />
+    <title>Pelagos — Ai là kẻ đánh cắp mặt trăng?</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    <div class="case-topline">
+      <span>PELAGOS ARCHIVES</span><span>HỒ SƠ ĐIỀU TRA · 01</span>
+    </div>
+    <header class="masthead">
+      <span class="eyebrow">THE MISSING MOON</span>
+      <h1>PELAGOS</h1>
+      <p class="subtitle">AI LÀ KẺ ĐÁNH CẮP MẶT TRĂNG?</p>
+      <div class="case-rule"><span>CASE FILE</span></div>
+    </header>
+    <main>
+      <section class="dossier" aria-labelledby="dossier-title">
+        <div class="section-heading">
+          <span class="section-number">01</span>
+          <div>
+            <p class="eyebrow">HỒ SƠ PELAGOS</p>
+            <h2 id="dossier-title">Những mảnh ghép của vụ án</h2>
+          </div>
+        </div>
+        <nav class="categories" aria-label="Nhóm thẻ">
+          <button type="button" data-category="suspects" aria-pressed="false">
+            SUSPECTS<span>Nhân vật</span>
+          </button>
+          <button type="button" data-category="weapons" aria-pressed="false">
+            WEAPONS<span>Công cụ</span>
+          </button>
+          <button type="button" data-category="locations" aria-pressed="false">
+            LOCATIONS<span>Địa điểm</span>
+          </button>
+        </nav>
+        <div id="card-empty" class="empty-dossier">
+          <span class="empty-number">12 THẺ · 3 NHÓM · 1 VỤ ÁN</span>
+          <p>Mỗi cuộc điều tra bắt đầu bằng sự quan sát.</p>
+          <span>Chọn một nhóm ở trên để mở hồ sơ.</span>
+        </div>
+        <div id="card-area" hidden>
+          <button id="card-size" type="button" aria-pressed="false">
+            Xem thẻ lớn
+          </button>
+          <p class="card-instruction">CHẠM VÀO THẺ ĐỂ LẬT MẶT TRƯỚC / SAU</p>
+          <div id="cards" class="cards"></div>
+        </div>
+      </section>
+      <section class="notebook" aria-labelledby="notebook-title">
+        <div class="notebook-heading">
+          <div class="section-heading">
+            <span class="section-number">02</span>
+            <div>
+              <p class="eyebrow">SỔ TAY SUY LUẬN</p>
+              <h2 id="notebook-title">INVESTIGATOR'S NOTEBOOK</h2>
+            </div>
+          </div>
+          <span id="save-status" class="save-status" role="status"
+            >Lưu trên thiết bị này</span
+          >
+        </div>
+        <div class="notebook-tools">
+          <p>Chạm một ô để đánh dấu suy luận của bạn.</p>
+          <div class="legend" aria-label="Thứ tự đánh dấu">
+            <span><b class="excluded">✕</b> Loại trừ</span><i>→</i
+            ><span><b class="possible">?</b> Phân vân</span><i>→</i
+            ><span><b class="confirmed">✓</b> Xác nhận</span><i>→</i
+            ><span>Trống</span>
+          </div>
+        </div>
+        <div
+          class="grid-scroll"
+          tabindex="0"
+          role="region"
+          aria-label="Bảng suy luận, có thể cuộn ngang"
+        >
+          <div id="logic-notebook" class="logic-notebook"></div>
+        </div>
+        <div class="notebook-foot">
+          <p>
+            <span class="confirmed">✓</span> Khi xác nhận, các ô khác cùng hàng
+            và cột tự động bị loại trừ.<br /><span class="mobile-help"
+              >Vuốt ngang để xem toàn bộ bảng.</span
+            >
+          </p>
+          <button id="reset" type="button" class="reset">RESET NOTEBOOK</button>
+        </div>
+        <p
+          id="grid-status"
+          class="sr-only"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </section>
+    </main>
+    <footer>
+      <span>PELAGOS</span>
+      <p>Quan sát cẩn thận. Suy luận độc lập.</p>
+      <span>CASE FILE · 01</span>
+    </footer>
+    <dialog id="reset-dialog" aria-labelledby="reset-title">
+      <form method="dialog">
+        <p class="eyebrow">SỔ TAY SUY LUẬN</p>
+        <h2 id="reset-title">Bắt đầu lại?</h2>
+        <p>Bạn có chắc muốn xóa toàn bộ ghi chú suy luận?</p>
+        <div class="dialog-actions">
+          <button value="cancel" autofocus>Giữ ghi chú</button
+          ><button value="confirm" class="danger">Xóa toàn bộ</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

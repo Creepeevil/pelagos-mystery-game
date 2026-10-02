@@ -1,0 +1,146 @@
+[
+  {
+    "page": 1,
+    "file": "assets/cards/suspects/bernica-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 2,
+    "file": "assets/cards/suspects/bernica-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 3,
+    "file": "assets/cards/suspects/alyssa-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 4,
+    "file": "assets/cards/suspects/alyssa-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 5,
+    "file": "assets/cards/suspects/glaucous-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 6,
+    "file": "assets/cards/suspects/glaucous-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 7,
+    "file": "assets/cards/suspects/celadon-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 8,
+    "file": "assets/cards/suspects/celadon-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 9,
+    "file": "assets/cards/weapons/moon-key-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 10,
+    "file": "assets/cards/weapons/moon-key-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 11,
+    "file": "assets/cards/weapons/metal-clamp-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 12,
+    "file": "assets/cards/weapons/metal-clamp-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 13,
+    "file": "assets/cards/weapons/power-drill-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 14,
+    "file": "assets/cards/weapons/power-drill-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 15,
+    "file": "assets/cards/weapons/repair-drone-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 16,
+    "file": "assets/cards/weapons/repair-drone-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 17,
+    "file": "assets/cards/locations/control-room-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 18,
+    "file": "assets/cards/locations/control-room-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 19,
+    "file": "assets/cards/locations/old-library-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 20,
+    "file": "assets/cards/locations/old-library-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 21,
+    "file": "assets/cards/locations/underground-tunnel-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 22,
+    "file": "assets/cards/locations/underground-tunnel-back.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 23,
+    "file": "assets/cards/locations/observation-room-front.webp",
+    "width": 1200,
+    "height": 1698
+  },
+  {
+    "page": 24,
+    "file": "assets/cards/locations/observation-room-back.webp",
+    "width": 1200,
+    "height": 1698
+  }
+]
