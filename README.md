@@ -100,7 +100,7 @@ Repeated taps cycle EMPTY → ✕ EXCLUDED → ? POSSIBLE → ✓ CONFIRMED → 
 
 ## Auto Elimination
 
-Only a newly placed ✓ excludes the six other cells in its row and column, in the same matrix. A new confirmation overrides old ✓ and ? neighbors. No deductions cross between matrices. Clearing a ✓ removes its automatic ✕ marks, except where another ✓ still requires the exclusion. Manually placed ✕ marks are preserved. Replacing a confirmation also clears automatic exclusions that are no longer needed.
+Only a newly placed ✓ excludes up to six other cells in its row and column, in the same matrix. Question marks are preserved when adding, replacing or clearing other ticks, including after a reload. A ? changes to ✓ only when the player taps that cell; resetting the case clears all marks. A new confirmation overrides old ✓ neighbors. No deductions cross between matrices. Clearing a ✓ removes its automatic ✕ marks, except where another ✓ still requires the exclusion. Manually placed ✕ marks are preserved. Replacing a confirmation also clears automatic exclusions that are no longer needed.
 
 Test: tap Moon Key × Bernica three times. It becomes ✓, the three other suspects in the Moon Key row and the three other weapons in Bernica's column become ✕. The other two matrices remain untouched. Also try Power Drill × Control Room and Underground Tunnel × Glaucous in their respective matrices.
 

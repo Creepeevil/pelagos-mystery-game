@@ -43,7 +43,7 @@ test("confirmation excludes exactly six neighbors in each matrix, without crossi
     assert.equal(Object.values(state).filter((value) => value === 1).length, 6);
   }
 });
-test("new confirmation overrides an existing confirmation and possible marks", () => {
+test("new confirmation overrides an existing confirmation", () => {
   const state = createState();
   for (let i = 0; i < 3; i++)
     cycleCell(state, "weapons-suspects", "moon-key", "bernica");
@@ -51,6 +51,105 @@ test("new confirmation overrides an existing confirmation and possible marks", (
     cycleCell(state, "weapons-suspects", "moon-key", "alyssa");
   assert.equal(state["weapons-suspects:moon-key:alyssa"], 3);
   assert.equal(state["weapons-suspects:moon-key:bernica"], 1);
+});
+
+test("question marks survive adding, replacing and removing ticks in every matrix", () => {
+  for (const matrix of matrices) {
+    const state = createState();
+    const row = matrix.rows[0].id;
+    const col = matrix.cols[0].id;
+    const questions = [[row, matrix.cols[1].id], [matrix.rows[1].id, col]];
+    for (const [r, c] of questions)
+      for (let i = 0; i < 2; i++) cycleCell(state, matrix.id, r, c);
+    const assertQuestions = () => {
+      for (const [r, c] of questions) {
+        const key = cellKey(matrix.id, r, c);
+        assert.equal(state[key], 2, `${key} must remain a question mark`);
+        assert.equal(state.automaticExclusions.has(key), false);
+      }
+    };
+    for (let i = 0; i < 3; i++) cycleCell(state, matrix.id, row, col);
+    assertQuestions();
+    assert.equal(Object.values(state).filter(value => value === 1).length, 4);
+    // Replace the tick by clicking another automatically crossed cell twice.
+    const replacementCol = matrix.cols[2].id;
+    for (let i = 0; i < 2; i++) cycleCell(state, matrix.id, row, replacementCol);
+    assertQuestions();
+    cycleCell(state, matrix.id, row, replacementCol);
+    assertQuestions();
+    assert.equal(Object.values(state).filter(value => value !== 0).length, 2);
+  }
+});
+
+test("only a direct click changes a question mark to a tick", () => {
+  for (const matrix of matrices) {
+    const state = createState();
+    const row = matrix.rows[0].id;
+    const firstCol = matrix.cols[0].id;
+    const questionCol = matrix.cols[1].id;
+    for (let i = 0; i < 2; i++) cycleCell(state, matrix.id, row, questionCol);
+    for (let i = 0; i < 3; i++) cycleCell(state, matrix.id, row, firstCol);
+    assert.equal(state[cellKey(matrix.id, row, questionCol)], 2);
+    cycleCell(state, matrix.id, row, questionCol);
+    assert.equal(state[cellKey(matrix.id, row, questionCol)], 3);
+    assert.equal(state[cellKey(matrix.id, row, firstCol)], 1);
+    cycleCell(state, matrix.id, row, questionCol);
+    assert.ok(Object.values(state).every(value => value === 0));
+  }
+});
+
+test("question marks created from automatic crosses survive later ticks", () => {
+  for (const matrix of matrices) {
+    const state = createState();
+    const row = matrix.rows[0].id;
+    const col = matrix.cols[0].id;
+    const questionCol = matrix.cols[1].id;
+    for (let i = 0; i < 3; i++) cycleCell(state, matrix.id, row, col);
+    cycleCell(state, matrix.id, row, questionCol);
+    assert.equal(state[cellKey(matrix.id, row, questionCol)], 2);
+    // Remove the original tick, then add it again.
+    for (let i = 0; i < 4; i++) cycleCell(state, matrix.id, row, col);
+    assert.equal(state[cellKey(matrix.id, row, questionCol)], 2);
+    assert.equal(state.automaticExclusions.has(cellKey(matrix.id, row, questionCol)), false);
+  }
+});
+
+test("question marks remain protected after saving and reloading, and clear on reset", (t) => {
+  const previousStorage = globalThis.localStorage;
+  t.after(() => { globalThis.localStorage = previousStorage; });
+  const entries = new Map();
+  globalThis.localStorage = {
+    getItem: key => entries.get(key) ?? null,
+    setItem: (key, value) => entries.set(key, value),
+    removeItem: key => entries.delete(key),
+  };
+  for (const matrix of matrices) {
+    let state = createState();
+    const row = matrix.rows[0].id;
+    const col = matrix.cols[0].id;
+    const questions = [[row, matrix.cols[1].id], [matrix.rows[1].id, col]];
+    const assertQuestions = () => {
+      for (const [r, c] of questions) assert.equal(state[cellKey(matrix.id, r, c)], 2);
+    };
+    for (const [r, c] of questions)
+      for (let i = 0; i < 2; i++) cycleCell(state, matrix.id, r, c);
+    assert.equal(saveNotebook(state), true);
+    state = createState(loadNotebook());
+    for (let i = 0; i < 3; i++) cycleCell(state, matrix.id, row, col);
+    assertQuestions();
+    assert.equal(saveNotebook(state), true);
+    state = createState(loadNotebook());
+    cycleCell(state, matrix.id, row, col);
+    assertQuestions();
+    assert.equal(Object.values(state).filter(value => value !== 0).length, 2);
+    // Saves without automatic-exclusion metadata also preserve question marks.
+    for (let i = 0; i < 3; i++) cycleCell(state, matrix.id, row, col);
+    state = createState({ ...state });
+    cycleCell(state, matrix.id, row, col);
+    assertQuestions();
+    assert.equal(clearNotebook(), true);
+    assert.ok(Object.values(createState(loadNotebook())).every(value => value === 0));
+  }
 });
 test("removing a confirmation clears its automatic row and column marks in all matrices", () => {
   for (const matrix of matrices) {

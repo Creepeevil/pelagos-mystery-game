@@ -105,6 +105,8 @@ export function cycleCell(state, matrixId, rowId, colId) {
           !(row.id === rowId && col.id === colId)
         ) {
           const neighbor = cellKey(matrixId, row.id, col.id);
+          // Question marks are manual notes; only a direct click changes them.
+          if (state[neighbor] === CellState.POSSIBLE) continue;
           // Existing manual crosses stay manual; other overwritten marks are
           // automatic and will clear when their last confirmation is removed.
           if (state[neighbor] !== CellState.EXCLUDED)
@@ -203,7 +205,7 @@ export function initNotebook(container, status) {
               ? "Đã lưu trên thiết bị"
               : "Không thể lưu · ghi chú chỉ giữ trong phiên này";
           document.querySelector("#grid-status").textContent =
-            `${button.dataset.pair}: ${names[state[key]]}${state[key] === 3 ? ". Đã loại trừ các ô khác cùng hàng và cột." : previous === 3 ? ". Đã xóa các dấu loại trừ tự động không còn cần thiết." : "."}`;
+            `${button.dataset.pair}: ${names[state[key]]}${state[key] === 3 ? ". Đã loại trừ các ô khác cùng hàng và cột, giữ nguyên các dấu hỏi chấm." : previous === 3 ? ". Đã xóa các dấu loại trừ tự động không còn cần thiết." : "."}`;
         });
         buttons.set(key, button);
         grid.append(button);
